@@ -21,7 +21,8 @@ jobs:
         source-url: ${{ env.GitHubPackageFeedUrl }} 
 
     - name: ls
-      run: ls -al ${{ github.WORKSPACE }}/AnimalAdoption.Common.Logic/
+      run: ls -al ${{ github.workspace }}
+
     - name: Package up project
       run: dotnet pack --configuration Release ${{ env.LogicProjectPath }}
     - name: Push package to GitHub registry
@@ -36,7 +37,5 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: ls
-      run: ls ${{ github.workspace }}
     - name: Test
       run: dotnet test '${{ github.workspace }}/AnimalAdoption.Web.Portal.UnitTests/AnimalAdoption.Web.Portal.UnitTests.csproj' --no-build --verbosity normal
