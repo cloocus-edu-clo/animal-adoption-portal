@@ -47,7 +47,7 @@ jobs:
         run: dotnet pack --configuration Release ${{ env.LogicProjectPath }}
 
       - name: Set API key
-        run: nuget setapikey ${{ env.NUGET_AUTH_TOKEN }} -Config nuget.config -Source ${{ env.GitHubPackageFeedUrl }}
+        run: nuget setapikey ${{ env.NUGET_AUTH_TOKEN }} -Source ${{ env.GitHubPackageFeedUrl }}
   
       - name: Push package to GitHub registry
         run: dotnet nuget push ${{ env.LogicProjectPath }}/**/*.nupkg --skip-duplicate      
