@@ -34,11 +34,20 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-      
+          ls -la
+          
       - name: List out directory contents
         run: |
           echo Listing the contents of the GitHub workspace directory
           ls ${{ github.workspace }}
           echo Recursively listing all contents of the current directory
           ls -R
-
+   
+      - name: Setup .NET Core @ Latest
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
+        run: |
+          dotnet build AnimalAdoption.sln
+          
+          
