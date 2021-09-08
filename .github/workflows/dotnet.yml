@@ -24,4 +24,4 @@ jobs:
     - name: ls
       run: ls ${{ github.workspace }}
     - name: Test
-      run: dotnet test '**/AnimalAdoption.Web.Portal.UnitTests.csproj' --no-build --verbosity normal
+      run: dotnet test '${{ github.workspace }}/AnimalAdoption.Web.Portal.UnitTests/AnimalAdoption.Web.Portal.UnitTests.csproj' --no-build --verbosity normal
