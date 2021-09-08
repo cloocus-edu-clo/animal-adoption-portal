@@ -46,7 +46,7 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           source-url: ${{ env.GitHubPackageFeedUrl }}
-
+          
       - name: Package up project
         run: dotnet pack --configuration Release ${{ env.LogicProjectPath }}
   
