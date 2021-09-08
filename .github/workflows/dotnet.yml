@@ -9,7 +9,7 @@ on:
 env:
   GitHubPackageFeedUrl: https://nuget.pkg.github.com/cloocus-edu-clo/index.json
   LogicProjectPath: ${{ github.WORKSPACE }}/AnimalAdoption.Common.Logic
-  NUGET\_AUTH\_TOKEN: ${{ secrets.GITHUB\_TOKEN }} 
+  NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
 
 jobs:
   build:
