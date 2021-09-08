@@ -21,7 +21,7 @@ jobs:
         source-url: ${{ env.GitHubPackageFeedUrl }} 
 
     - name: ls
-      run: ls -al ${{ github.workspace }}
+      run: ls -al ${{ github.workspace }}/..
 
     - name: Package up project
       run: dotnet pack --configuration Release ${{ env.LogicProjectPath }}
