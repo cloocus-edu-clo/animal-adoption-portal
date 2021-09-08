@@ -1,0 +1,37 @@
+name: .NET
+
+on:
+  push:
+    branches: [ Ian/task ]
+  pull_request:
+    branches: [ Ian/task ]
+
+env:
+  GitHubPackageFeedUrl: https://nuget.pkg.github.com/cloocus-edu-clo/index.json
+  LogicProjectPath: ${{ github.WORKSPACE }}/AnimalAdoption.Common.Logic
+  NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test '${{ github.workspace }}/AnimalAdoption.Web.Portal.UnitTests/AnimalAdoption.Web.Portal.UnitTests.csproj' --no-build --verbosity normal
+
+    - name: Setup .NET Core @ Latest
+      uses: actions/setup-dotnet@v1
+      with:
+        source-url: ${{ env.GitHubPackageFeedUrl }} 
+    - name: Package up project
+      run: dotnet pack --configuration Release ${{ env.LogicProjectPath }}
+    - name: Push package to GitHub registry
+      run: dotnet nuget push ${{ env.LogicProjectPath }}/\*\*/\*.nupkg --skip-duplicate    
