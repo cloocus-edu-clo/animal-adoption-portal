@@ -46,6 +46,9 @@ jobs:
       - name: Package up project
         run: dotnet pack --configuration Release ${{ env.LogicProjectPath }}
 
+      - name: Set API key
+        run: nuget setapikey ${{ secrets.FEEDZ_TOKEN }} -Config nuget.config -Source ${{ env.GitHubPackageFeedUrl }}
+  
       - name: Push package to GitHub registry
         run: dotnet nuget push ${{ env.LogicProjectPath }}/**/*.nupkg --skip-duplicate      
           
