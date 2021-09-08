@@ -13,18 +13,5 @@ jobs:
 
     steps:
       env:
-        GitHubPackageFeedUrl: https://nuget.pkg.github.com/(your-organisation-name)/index.json
-        LogicProjectPath: ${{ github.WORKSPACE }}/AnimalAdoption.Common.Logic    
-    - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: ls
-      run: ls ${{ github.workspace }}
-    - name: Test
-      run: dotnet test '${{ github.workspace }}/AnimalAdoption.Web.Portal.UnitTests/AnimalAdoption.Web.Portal.UnitTests.csproj' --no-build --verbosity normal
+        GitHubPackageFeedUrl: https://nuget.pkg.github.com/cloocus-edu-clo/index.json
+        LogicProjectPath: ${{ github.WORKSPACE }}/AnimalAdoption.Common.Logic
