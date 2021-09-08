@@ -8,7 +8,7 @@ on:
 
 env:
   GitHubPackageFeedUrl: https://nuget.pkg.github.com/cloocus-edu-clo/index.json
-  LogicProjectPath: ${{ github.WORKSPACE }}/AnimalAdoption.Common.Logic/*.csproj
+  LogicProjectPath: ${{ github.WORKSPACE }}/AnimalAdoption.Common.Logic/
   NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
 
 jobs:
@@ -21,7 +21,7 @@ jobs:
         source-url: ${{ env.GitHubPackageFeedUrl }} 
 
     - name: ls
-      run: ls -al ${{ env.LogicProjectPath }}
+      run: ls -al ${{ github.WORKSPACE }}/AnimalAdoption.Common.Logic/
     - name: Package up project
       run: dotnet pack --configuration Release ${{ env.LogicProjectPath }}
     - name: Push package to GitHub registry
