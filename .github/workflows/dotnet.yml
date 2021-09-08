@@ -21,5 +21,7 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
+    - name: ls
+      run: ls ${{ github.workspace }}
     - name: Test
       run: dotnet test '**/AnimalAdoption.Web.Portal.UnitTests.csproj' --no-build --verbosity normal
