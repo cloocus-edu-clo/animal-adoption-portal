@@ -42,18 +42,22 @@ jobs:
       - name: dotnet test
         run: dotnet test ${{ github.workspace }}/AnimalAdoption.Web.Portal.UnitTests/
     
-      - uses: actions/setup-dotnet@v1
+
+
+
+      - name: Setup .NET Core 
+        uses: actions/setup-dotnet@v1
         with:
+          dotnet-version: '3.1.x' 
           source-url: ${{ env.GitHubPackageFeedUrl }}
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Package up project
         run: dotnet pack --configuration Release ${{ env.LogicProjectPath }}
-
-      #- name: Set API key
-        #run: nuget setapikey ${{ env.NUGET_AUTH_TOKEN }} -Source ${{ env.GitHubPackageFeedUrl }}
   
       - name: Push package to GitHub registry
-        run: dotnet nuget push ${{ env.LogicProjectPath }}/**/*.nupkg --skip-duplicate --api-key ${{ env.NUGET_AUTH_TOKEN }} 
+        run: dotnet nuget push ${{ env.LogicProjectPath }}/**/*.nupkg --skip-duplicate --no-symbols true
         
           
           
