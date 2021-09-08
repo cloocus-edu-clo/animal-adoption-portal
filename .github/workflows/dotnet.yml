@@ -2,9 +2,9 @@ name: .NET
 
 on:
   push:
-    branches: [ featrues/ted/HOL2 ]
+    branches: [ features/ted/HOL2 ]
   pull_request:
-    branches: [ featrues/ted/HOL2 ]
+    branches: [ features/ted/HOL2 ]
 
 jobs:
   build:
