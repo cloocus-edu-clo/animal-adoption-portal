@@ -2,9 +2,13 @@ name: .NET
 
 on:
   push:
-    branches: [ featrues/ted/HOL2 ]
+    branches: [ features/ted/HOL2 ]
   pull_request:
-    branches: [ featrues/ted/HOL2 ]
+    branches: [ features/ted/HOL2 ]
+
+env:
+    GitHubPackageFeedUrl: https://nuget.pkg.github.com/cloocus-edu-clo/index.json
+    LogicProjectPath: ${{ github.WORKSPACE }}/AnimalAdoption.Common.Logic
 
 jobs:
   build:
@@ -16,10 +20,23 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 3.1.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+
+    - name: Setup .NET Core @ Latest
+      uses: actions/setup-dotnet@v1
+      with:
+        source-url: ${{ env.GitHubPackageFeedUrl }}
+      env:
+        NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub automatically creates a GITHUB\_TOKEN secret to use in your workflow
+    - name: Package up project
+      run: dotnet pack --configuration Release ${{ env.LogicProjectPath }}
+
+    - name: Push package to GitHub registry
+      run: dotnet nuget push ${{ env.LogicProjectPath }}/\*\*/\*.nupkg --skip-duplicate
+
