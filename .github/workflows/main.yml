@@ -28,14 +28,16 @@ jobs:
         with:
           dotnet-version: '3.1.x' 
       
-      - name: resotre
+      - name: dotnet resotre
         run: dotnet restore ${{ github.workspace }}
           
-      - name: build
+      - name: dotnet build
         run: dotnet build ${{ github.workspace }}
       
-      - name: test
-        run: dotnet test ${{ github.workspace }}/**Test*.csproj
+      - name: dotnet test
+        run: dotnet test ${{ github.workspace }}/AnimalAdoption.Web.Portal.UnitTests/
+
+      
           
           
           
