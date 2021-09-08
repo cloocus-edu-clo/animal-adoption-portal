@@ -7,9 +7,9 @@ namespace AnimalAdoption.Common.Logic
     public class AnimalService
     {
         public Animal[] ListAnimals => new Animal[] {
-            new Animal { Id = 1, Name = "Sedi", Age = 50, Description = "Soft natured" },
-            new Animal { Id = 2, Name = "Metamorph", Age = 50, Description = "Under a lot of pressure" },
-            new Animal { Id = 3, Name = "Igno", Age = 50, Description = "Shiny and glasslike" },
+            new Animal { Id = 1, Name = "dog", Age = 5, Description = "The dog or domestic dog (Canis familiaris)[4] is a domesticated descendant of the wolf, characterized by an upturning tail." },
+            new Animal { Id = 2, Name = "cat", Age = 5, Description = "The cat (Felis catus) is a domestic species of small carnivorous mammal." },
+            new Animal { Id = 3, Name = "horse", Age = 10, Description = "The horse or domestic horse (Equus caballus or Equus ferus caballus)[2][3] is a domesticated one-toed hoofed mammal. " },
         };
     }
 }
