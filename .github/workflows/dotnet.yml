@@ -1,10 +1,10 @@
-name: .NET
+name: ted
 
 on:
   push:
-    branches: [ Ian/task ]
+    branches: [ features/ted/HOL3 ]
   pull_request:
-    branches: [ Ian/task ]
+    branches: [ features/ted/HOL3 ]
 
 env:
   GitHubPackageFeedUrl: https://nuget.pkg.github.com/cloocus-edu-clo/index.json
