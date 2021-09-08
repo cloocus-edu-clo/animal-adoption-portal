@@ -34,9 +34,11 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      
       - name: List out directory contents
         run: |
-          echo &quot;Listing the contents of the GitHub workspace directory&quot;
+          echo Listing the contents of the GitHub workspace directory
           ls ${{ github.workspace }}
-          echo &quot;Recursively listing all contents of the current directory&quot;
-          ls -R          
+          echo Recursively listing all contents of the current directory
+          ls -R
+
