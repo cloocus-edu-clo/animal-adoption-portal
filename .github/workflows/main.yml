@@ -43,11 +43,13 @@ jobs:
         run: |
           echo Listing the contents of the GitHub workspace directory
           ls ${{ github.workspace }}
-          echo Recursively listing all contents of the current directory
-          ls -R
+          #echo Recursively listing all contents of the current directory
+          #ls -R
    
       - name: build
         run: |
-          dotnet build AnimalAdoption.sln
+          dotnet restore ${{ github.workspace }}
+          dotnet build ${{ github.workspace }}
+          dotnet test ${{ github.workspace }}
           
           
