@@ -38,7 +38,7 @@ jobs:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'Development'
+      name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -53,7 +53,7 @@ jobs:
 
     - uses: Azure/get-keyvault-secrets@v1
       with:
-        keyvault: "cloocus-edu-clo"
+        keyvault: "GlenTest03"
         secrets: 'GlobalPassword'
         id: myGetSecretAction
 
