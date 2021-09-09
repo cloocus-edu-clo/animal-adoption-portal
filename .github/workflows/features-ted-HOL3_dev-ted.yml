@@ -82,12 +82,28 @@ jobs:
       with:
         creds: '${{ secrets.TED_AZURE_CREDENTIALS }}'
 
+    - name: Azure key vault - Get Secrets
+      uses: Azure/get-keyvault-secrets@v1
+      with:
+        keyvault: "dev-ted-kv"
+        secrets: 'GLOBAL-PASSWORD'
+      id: akv
+
+
     - name: Azure App Service Settings
       uses: Azure/appservice-settings@v1
       with:
         app-name: 'dev-ted'
         app-settings-json: '${{ secrets.TED_APP_SETTINGS }}' 
       id: settings
+
+    - name: Azure App Service Settings2
+      uses: Azure/appservice-settings@v1
+      with:
+        app-name: 'dev-ted'
+        app-settings-json: '[{ "GlobalPassword": "${{ steps.akv.outputs.GLOBAL-PASSWORD }}"}]'
+      id: settings
+
     - run: echo "The webapp-url is ${{ steps.settings.outputs.webapp-url }}"
     - run: |
         az logout
