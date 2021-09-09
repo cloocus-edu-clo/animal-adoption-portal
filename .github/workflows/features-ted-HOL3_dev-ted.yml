@@ -78,5 +78,16 @@ jobs:
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_63710bf3fb4d417da1a7d0bb843c9415 }}
         package: .
 
+    - uses: azure/login@v1
+      with:
+        creds: '${{ secrets.TED_AZURE_CREDENTIALS }}'
+
     - name: Azure App Service Settings
       uses: Azure/appservice-settings@v1
+      with:
+        app-name: 'dev-ted'
+        app-settings-json: '${{ secrets.TED_APP_SETTINGS }}' 
+      id: settings
+    - run: echo "The webapp-url is ${{ steps.settings.outputs.webapp-url }}"
+    - run: |
+        az logout
