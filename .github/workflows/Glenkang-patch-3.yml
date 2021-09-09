@@ -47,6 +47,15 @@ jobs:
       with:
         name: .net-app
 
+    - name: Deploy to Azure Web App
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'GlenTest03'
+        slot-name: 'Production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_cba35edb7333460a95d2a34be5b759d0 }}
+        package: .
+
     - uses: azure/login@v1
       with:
         creds: '${{ secrets.GLEN_AZURE_CREDENTIALS }}'
@@ -62,15 +71,6 @@ jobs:
       with:
         app-name: 'GlenTest03'
         app-settings-json: ${{ secrets.APP_SETTINGS_JSON }}
-
-    - name: Deploy to Azure Web App
-      id: deploy-to-webapp
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: 'GlenTest03'
-        slot-name: 'Production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_cba35edb7333460a95d2a34be5b759d0 }}
-        package: .
 
 
 #
