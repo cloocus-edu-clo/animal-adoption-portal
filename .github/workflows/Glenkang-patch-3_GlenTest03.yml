@@ -47,6 +47,12 @@ jobs:
       with:
         name: .net-app
 
+      - name: Set Web App ACR authentication
+        uses: Azure/appservice-settings@v1
+        with:
+          app-name: 'ssemi-dev'
+          app-settings-json: ${{ secrets.APP_SETTINGS_JSON }}
+
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
@@ -54,4 +60,6 @@ jobs:
         app-name: 'GlenTest03'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_cba35edb7333460a95d2a34be5b759d0 }}
-        package: .
+        package:
+      env: 
+        GlobalPassword: ${{ secrets.GlobalPassword }}
