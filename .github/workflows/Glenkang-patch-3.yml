@@ -81,9 +81,7 @@ jobs:
       id: settings2
 
     - run: echo "The webapp-url is ${{ steps.settings.outputs.webapp-url }}"
+
     - run: az configure --defaults group="cloocus-edu-clo" workspace="GlenTest03"
-az logout
-
-
 
 #
