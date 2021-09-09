@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net Core app to Azure Web App - ssemi-dev
+name: ssemi-dev
 
 on:
   push:
@@ -40,6 +40,7 @@ jobs:
     environment:
       name: 'Development'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      
 
     steps:
       - name: Download artifact from build job
@@ -50,8 +51,10 @@ jobs:
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
-        with:
+        with: 
           app-name: 'ssemi-dev'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A2E489D253D24859879F21497C9E0436 }}
           package: .
+        env: 
+          GlobalPassword: ${{ secrets.GlobalPassword }}

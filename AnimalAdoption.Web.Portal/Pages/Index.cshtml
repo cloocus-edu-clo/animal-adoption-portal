@@ -4,6 +4,8 @@
     ViewData["Title"] = "Home page";
 }
 
+@Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")
+@Environment.GetEnvironmentVariable("GlobalPassword")
 <div>
     <h1>Animal Information</h1>
     <table class='table table-striped'>
