@@ -34,43 +34,28 @@ jobs:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
 
-  deploy:
-    runs-on: windows-latest
-    needs: build
-    environment:
-      name: 'Development'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-      
 
+  build-and-deploy:
+    runs-on: ubuntu-latest
     steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: .net-app
 
+      # Checkout code
+    - uses: actions/checkout@main
 
-      - uses: azure/login@v1
-        with:
-          creds: '${{ secrets.SSEMI_AZURE_CREDENTIALS }}'
+      # Log into Azure
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.SSEMI_AZURE_CREDENTIALS }}
 
-      - uses: Azure/get-keyvault-secrets@v1
-        with:
-          keyvault: "cloocus-edu-clo"
-          secrets: 'GlobalPassword'
-        id: kvAction
+      # Deploy ARM template
+    - name: Run ARM deploy
+      uses: azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.SSEMI_AZURE_SUBSCRIPTION }}
+        resourceGroupName: ${{ secrets.SSEMI_AZURE_RG }}
+        template: ./deploy.json
+        parameters: storageAccountType=Standard_LRS
 
-      - name: Set Web App ACR authentication
-        uses: Azure/appservice-settings@v1
-        with:
-          app-name: 'ssemi-dev'
-          app-settings-json: '[{ "name": "GlobalPassword", "value":"${{ steps.kvAction.outputs.GlobalPassword }}", "slotSetting": false  }]'
-
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with: 
-          app-name: 'ssemi-dev'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A2E489D253D24859879F21497C9E0436 }}
-          package: .
+      # output containerName variable from template
+    - run: echo ${{ steps.deploy.outputs.containerName }}
 
