@@ -63,7 +63,7 @@ jobs:
         uses: Azure/appservice-settings@v1
         with:
           app-name: 'ssemi-dev'
-          app-settings-json: '[{ "GlobalPassword" : "${{ steps.kvAction.outputs.GlobalPassword }}" }]'
+          app-settings-json: '[{ "name": "GlobalPassword", "value":"${{ steps.kvAction.outputs.GlobalPassword }}", "slotSetting": false  }]'
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
