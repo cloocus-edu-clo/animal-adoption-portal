@@ -6,7 +6,7 @@
       "value": "cloocus-edu-clo",
     },
     "keyVaultName": {
-      "value": "dev-ted-kv",
+      "value": "dev-ted-kv2",
     },
     "resourceGroupServicePrincipalManagedApplicationObjectId": {
       "value": "2ed031f4-9de1-4c1b-95dc-708fedf5bd2b",
@@ -15,7 +15,7 @@
       "value": "ab5eb3d0-6067-40ee-b4c0-a2ce05dbf039",
     },
     "webAppName": {
-      "value": "dev-ted",
+      "value": "dev-ted2",
     }
   }
 }
