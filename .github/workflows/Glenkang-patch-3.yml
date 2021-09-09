@@ -48,20 +48,20 @@ jobs:
         name: .net-app
 
     - uses: azure/login@v1
-        with:
-          creds: '${{ secrets.GLEN_AZURE_CREDENTIALS }}'
+      with:
+        creds: '${{ secrets.GLEN_AZURE_CREDENTIALS }}'
 
     - uses: Azure/get-keyvault-secrets@v1
-        with:
-          keyvault: "cloocus-edu-clo"
-          secrets: 'GlobalPassword'
-          id: myGetSecretAction
+      with:
+        keyvault: "cloocus-edu-clo"
+        secrets: 'GlobalPassword'
+        id: myGetSecretAction
 
     - name: Set Web App ACR authentication
-        uses: Azure/appservice-settings@v1
-        with:
-          app-name: 'GlenTest03'
-          app-settings-json: ${{ secrets.APP_SETTINGS_JSON }}
+      uses: Azure/appservice-settings@v1
+      with:
+        app-name: 'GlenTest03'
+        app-settings-json: ${{ secrets.APP_SETTINGS_JSON }}
 
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
