@@ -94,9 +94,10 @@ jobs:
       uses: Azure/appservice-settings@v1
       with:
         app-name: 'dev-ted'
-        app-settings-json: '[{ "GlobalPassword": "${{ steps.akv.outputs.GLOBAL-PASSWORD }}"}]'
+        app-settings-json: '[{ "name": "GlobalPassword", "value": "${{ steps.akv.outputs.GLOBAL-PASSWORD }}"}]'
       id: settings2
 
     - run: echo "The webapp-url is ${{ steps.settings.outputs.webapp-url }}"
     - run: |
         az logout
+
