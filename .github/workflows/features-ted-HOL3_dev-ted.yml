@@ -27,8 +27,11 @@ jobs:
         dotnet-version: '3.1.301'
         include-prerelease: true
 
+    - name: Restore dependencies
+      run: dotnet restore
+
     - name: Build with dotnet
-      run: dotnet build --configuration Release
+      run: dotnet build --no-restore
 
     - name: Test
       run: dotnet test '${{ github.workspace }}/AnimalAdoption.Web.Portal.UnitTests/AnimalAdoption.Web.Portal.UnitTests.csproj' --no-build --verbosity normal
