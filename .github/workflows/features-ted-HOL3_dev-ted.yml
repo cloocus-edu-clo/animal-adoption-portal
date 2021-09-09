@@ -90,13 +90,6 @@ jobs:
       id: akv
 
 
-    - name: Azure App Service Settings
-      uses: Azure/appservice-settings@v1
-      with:
-        app-name: 'dev-ted'
-        app-settings-json: '${{ secrets.TED_APP_SETTINGS }}' 
-      id: settings
-
     - name: Azure App Service Settings2
       uses: Azure/appservice-settings@v1
       with:
