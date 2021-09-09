@@ -38,16 +38,25 @@ jobs:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'Deployment'
+      name: 'Development'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
     - name: Download artifact from build job
       uses: actions/download-artifact@v2
       with:
-        name: 'GlenTest03'
+        name: .net-app
 
-      - name: Set Web App ACR authentication
+      - uses: azure/login@v1
+        with:
+          creds: '${{ secrets.GLEN_AZURE_CREDENTIALS }}'
+
+      - uses: Azure/get-keyvault-secrets@v1
+        with:
+          keyvault: "cloocus-edu-clo"
+          secrets: 'GlobalPassword'
+
+    - name: Set Web App ACR authentication
         uses: Azure/appservice-settings@v1
         with:
           app-name: 'GlenTest03'
@@ -58,8 +67,7 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'GlenTest03'
-        slot-name: 'production'
+        slot-name: 'Production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_cba35edb7333460a95d2a34be5b759d0 }}
-        package:
-      env: 
-        GlobalPassword: ${{ secrets.GlobalPassword }}
+        package: .
+
