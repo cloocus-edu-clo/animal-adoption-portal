@@ -60,7 +60,8 @@ jobs:
       with:
         creds: '${{ secrets.GLEN_AZURE_CREDENTIALS }}'
 
-    - uses: Azure/get-keyvault-secrets@v1
+    - name: Azure key vault - Get Secrets
+      uses: Azure/get-keyvault-secrets@v1
       with:
         keyvault: 'GlenTest03'
         secrets: 'GlobalPassword'
@@ -71,6 +72,17 @@ jobs:
       with:
         app-name: 'GlenTest03'
         app-settings-json: ${{ secrets.APP_SETTINGS_JSON }}
+
+    - name: Azure App Service Settings2
+      uses: Azure/appservice-settings@v1
+      with:
+        app-name: 'GlenTest03'
+        app-settings-json: '[{ "name": "GlobalPassword", "value": "${{ steps.GlenTest03.outputs.GLOBAL-PASSWORD }}"}]'
+      id: settings2
+
+    - run: echo "The webapp-url is ${{ steps.settings.outputs.webapp-url }}"
+    - run: |
+        az logout
 
 
 #
