@@ -34,7 +34,7 @@ jobs:
         subscriptionId: ${{ secrets.TED_AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.TED_AZURE_RG }}
         template: ./deploy-ted.json
-        parameters: appServicePlanName=cloocus-edu-clo
+        parameters: ./deploy-parameter-ted.json
 
       # output containerName variable from template
     - run: echo ${{ steps.deploy.outputs.containerName }}
