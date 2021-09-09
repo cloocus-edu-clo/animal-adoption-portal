@@ -64,7 +64,7 @@ jobs:
       with:
         keyvault: 'GlenTest03'
         secrets: 'GlobalPassword'
-        id: myGetSecretAction
+      id: GlenTest03
 
     - name: Set Web App ACR authentication
       uses: Azure/appservice-settings@v1
