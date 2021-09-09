@@ -50,7 +50,7 @@ jobs:
       - name: Set Web App ACR authentication
         uses: Azure/appservice-settings@v1
         with:
-          app-name: 'GlenTest03'
+          app-name: 'Glenkang-patch-3'
           app-settings-json: ${{ secrets.APP_SETTINGS_JSON }}
 
     - name: Deploy to Azure Web App
