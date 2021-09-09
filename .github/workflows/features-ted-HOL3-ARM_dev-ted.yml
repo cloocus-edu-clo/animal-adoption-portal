@@ -12,7 +12,7 @@ on:
 env:
   GitHubPackageFeedUrl: https://nuget.pkg.github.com/cloocus-edu-clo/index.json
   LogicProjectPath: ${{ github.WORKSPACE }}/AnimalAdoption.Common.Logic
-  NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+  NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   build-and-deploy:
@@ -34,6 +34,7 @@ jobs:
         subscriptionId: ${{ secrets.TED_AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.TED_AZURE_RG }}
         template: ./deploy-ted.json
+        parameters: appServicePlanName=cloocus-edu-clo
 
       # output containerName variable from template
     - run: echo ${{ steps.deploy.outputs.containerName }}
