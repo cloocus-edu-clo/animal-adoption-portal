@@ -49,11 +49,16 @@ jobs:
           name: .net-app
 
 
+      - uses: azure/login@v1
+        with:
+          creds: '${{ secrets.SSEMI_AZURE_CREDENTIALS }}'
+
       - name: Set Web App ACR authentication
         uses: Azure/appservice-settings@v1
         with:
           app-name: 'ssemi-dev'
           app-settings-json: ${{ secrets.APP_SETTINGS_JSON }}
+          
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -63,6 +68,4 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A2E489D253D24859879F21497C9E0436 }}
           package: .
-        env: 
-          MyEnvSsemi: ${{ secrets.SSEMI_DEVELOPMENT }}
-          GlobalPassword: ${{ secrets.GlobalPassword }}
+
