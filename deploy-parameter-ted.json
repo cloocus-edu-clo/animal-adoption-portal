@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "appServicePlanName": {
-      "value": "cloocus-edu-clo",
+      "value": "cloocus-edu-clo2",
     },
     "keyVaultName": {
       "value": "dev-ted-kv2",
