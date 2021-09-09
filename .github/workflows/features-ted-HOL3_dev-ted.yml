@@ -102,7 +102,7 @@ jobs:
       with:
         app-name: 'dev-ted'
         app-settings-json: '[{ "GlobalPassword": "${{ steps.akv.outputs.GLOBAL-PASSWORD }}"}]'
-      id: settings
+      id: settings2
 
     - run: echo "The webapp-url is ${{ steps.settings.outputs.webapp-url }}"
     - run: |
