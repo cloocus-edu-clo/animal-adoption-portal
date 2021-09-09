@@ -55,6 +55,7 @@ jobs:
         with:
           keyvault: "cloocus-edu-clo"
           secrets: 'GlobalPassword'
+          id: myGetSecretAction
 
     - name: Set Web App ACR authentication
         uses: Azure/appservice-settings@v1
