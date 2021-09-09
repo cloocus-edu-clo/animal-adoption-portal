@@ -47,6 +47,22 @@ jobs:
       with:
         name: .net-app
 
+    - uses: azure/login@v1
+      with:
+        creds: '${{ secrets.Ian_AZURE_CREDENTIALS }}'
+
+    - uses: Azure/get-keyvault-secrets@v1
+      with:
+        keyvault: "cloocus-edu-clo"
+        secrets: 'GlobalPassword'
+      id: kvAction
+
+    - name: Set Web App ACR authentication
+      uses: Azure/appservice-settings@v1
+      with:
+        app-name: 'ian-dev'
+        app-settings-json: '[{ "name": "GlobalPassword", "value":"${{ steps.kvAction.outputs.GlobalPassword }}", "slotSetting": false  }]'
+
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
