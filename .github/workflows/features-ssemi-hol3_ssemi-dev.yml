@@ -53,12 +53,17 @@ jobs:
         with:
           creds: '${{ secrets.SSEMI_AZURE_CREDENTIALS }}'
 
+      - uses: Azure/get-keyvault-secrets@v1
+        with:
+          keyvault: "cloocus-edu-clo"
+          secrets: 'GlobalPassword'
+
       - name: Set Web App ACR authentication
         uses: Azure/appservice-settings@v1
         with:
           app-name: 'ssemi-dev'
           app-settings-json: ${{ secrets.APP_SETTINGS_JSON }}
-          
+
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
