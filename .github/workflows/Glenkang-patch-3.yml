@@ -47,11 +47,11 @@ jobs:
       with:
         name: .net-app
 
-      - uses: azure/login@v1
+    - uses: azure/login@v1
         with:
           creds: '${{ secrets.GLEN_AZURE_CREDENTIALS }}'
 
-      - uses: Azure/get-keyvault-secrets@v1
+    - uses: Azure/get-keyvault-secrets@v1
         with:
           keyvault: "cloocus-edu-clo"
           secrets: 'GlobalPassword'
